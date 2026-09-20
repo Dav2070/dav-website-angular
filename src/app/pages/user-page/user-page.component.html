@@ -1,0 +1,177 @@
+<section class="page account">
+	<aside class="account-navigation" aria-label="Account settings">
+		<dav-button
+			[outline]="section() !== 'general'"
+			(click)="section.set('general')"
+			>{{ locale.sideNav.general }}</dav-button
+		><dav-button
+			[outline]="section() !== 'plans'"
+			(click)="section.set('plans')"
+			>{{ locale.sideNav.plans }}</dav-button
+		>
+	</aside>
+	<div class="account-content">
+		@if (error()) {
+			<div role="alert">
+				<dav-message-bar type="error" color="error">{{
+					error()
+				}}</dav-message-bar>
+			</div>
+		}
+		@if (success()) {
+			<div role="status">
+				<dav-message-bar type="success">{{ success() }}</dav-message-bar>
+			</div>
+		}
+		@if (busy()) {
+			<dav-progress-ring aria-label="Loading" />
+		}
+		@if (section() === "general") {
+			<h1>{{ locale.general.title }}</h1>
+			@if (!user().Confirmed) {
+				<dav-message-bar>{{
+					locale.general.emailNotConfirmed
+				}}</dav-message-bar
+				><dav-button
+					outline
+					[disabled]="busy()"
+					(click)="sendConfirmation()"
+					>{{ locale.general.sendConfirmationEmail }}</dav-button
+				>
+			}
+			<div class="profile-row">
+				@if (user().ProfileImage) {
+					<img
+						class="avatar"
+						[src]="user().ProfileImage"
+						[alt]="locale.general.profileImageAlt"
+						width="100"
+						height="100"
+					/>
+				}
+				<input
+					#file
+					type="file"
+					accept="image/png,image/jpeg,image/webp"
+					hidden
+					(change)="selectImage($event)"
+				/><dav-button outline [disabled]="busy()" (click)="file.click()">{{
+					locale.general.uploadProfileImage
+				}}</dav-button>
+			</div>
+			<div class="settings-form">
+				<dav-textfield
+					[label]="locale.general.firstNameTextfieldLabel"
+					[value]="firstName"
+					autocomplete="given-name"
+					[disabled]="busy()"
+					(change)="firstName = value($event)"
+					(enter)="save('firstName')"
+				/><dav-button [disabled]="busy()" (click)="save('firstName')">{{
+					locale.save
+				}}</dav-button>
+			</div>
+			<div class="settings-form">
+				<dav-textfield
+					[label]="locale.general.emailTextfieldLabel"
+					[value]="email"
+					[placeholder]="user().Email"
+					autocomplete="email"
+					type="email"
+					[disabled]="busy()"
+					(change)="email = value($event)"
+					(enter)="save('email')"
+				/><dav-button [disabled]="busy()" (click)="save('email')">{{
+					locale.save
+				}}</dav-button>
+			</div>
+			<div class="settings-form">
+				<dav-textfield
+					[label]="locale.general.passwordTextfieldLabel"
+					[value]="password"
+					type="password"
+					autocomplete="new-password"
+					[disabled]="busy()"
+					(change)="password = value($event)"
+				/><dav-textfield
+					[label]="locale.general.passwordConfirmationTextfieldLabel"
+					[value]="confirmation"
+					type="password"
+					autocomplete="new-password"
+					[disabled]="busy()"
+					(change)="confirmation = value($event)"
+					(enter)="save('password')"
+				/><dav-button [disabled]="busy()" (click)="save('password')">{{
+					locale.save
+				}}</dav-button>
+			</div>
+		} @else {
+			<h1>{{ locale.plans.title }}</h1>
+			<p>{{ locale.plans.currentPlan }}: {{ user().Plan }}</p>
+			@if (data.periodEndDate) {
+				<p>{{ locale.plans.nextPayment }}: {{ data.periodEndDate }}</p>
+			}
+			@if (data.card) {
+				<dav-card [headline]="locale.plans.paymentMethodCardHeader"
+					><p>{{ data.card.brand }} •••• {{ data.card.last4 }}</p>
+					<p>
+						{{ locale.plans.cardExpires }} {{ data.card.exp_month }}/{{
+							data.card.exp_year
+						}}
+					</p>
+					<dav-button outline [disabled]="busy()" (click)="portal()">{{
+						locale.plans.edit
+					}}</dav-button></dav-card
+				>
+			}
+			@if (user().Plan !== "FREE") {
+				<dav-button
+					outline
+					[disabled]="busy()"
+					(click)="cancelSubscription()"
+					>{{
+						user().SubscriptionStatus === "ENDING"
+							? locale.plans.continueSubscription
+							: locale.plans.cancelSubscription
+					}}</dav-button
+				>
+			}
+			<app-pricing
+				[selectable]="true"
+				[currentPlan]="user().Plan"
+				(choose)="pendingPlan.set($event)"
+			/>
+		}
+	</div>
+</section>
+<dav-dialog
+	[visible]="pendingPlan() !== null"
+	[headline]="locale.plans.edit"
+	[primaryButtonText]="locale.continue"
+	[defaultButtonText]="locale.cancel"
+	[loading]="busy()"
+	(primaryButtonClick)="confirmPlan()"
+	(defaultButtonClick)="pendingPlan.set(null)"
+	(dismiss)="pendingPlan.set(null)"
+>
+	<p>
+		{{
+			pendingPlan() === "PRO"
+				? locale.plans.changePlanDialog.upgradeProDescription
+				: pendingPlan() === "PLUS"
+					? locale.plans.changePlanDialog.downgradePlusDescription
+					: locale.plans.cancelSubscription
+		}}
+	</p>
+</dav-dialog>
+<dav-dialog
+	[visible]="cropVisible()"
+	[headline]="locale.general.profileImageDialog.header"
+	[primaryButtonText]="locale.save"
+	[defaultButtonText]="locale.cancel"
+	[loading]="busy()"
+	(primaryButtonClick)="uploadCrop()"
+	(defaultButtonClick)="closeCrop()"
+	(dismiss)="closeCrop()"
+	><div #cropContainer class="crop-container"></div
+></dav-dialog>

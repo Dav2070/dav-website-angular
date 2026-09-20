@@ -1,0 +1,21 @@
+.dialog-fields {
+	display: grid;
+	gap: 20px;
+}
+
+.chart-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 32px;
+}
+
+.chart {
+	position: relative;
+	height: 300px;
+}
+
+@media (max-width: 700px) {
+	.chart-grid {
+		grid-template-columns: 1fr;
+	}
+}

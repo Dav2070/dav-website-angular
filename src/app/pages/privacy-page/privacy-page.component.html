@@ -1,0 +1,38 @@
+<article class="legal">
+	<div>
+		<h1>{{ locale.title }}</h1>
+
+		<div style="font-size: 18px">
+			<p>{{ locale.intro }}</p>
+			<br />
+
+			<h3>{{ locale.section1.header }}</h3>
+			<p [innerHTML]="locale.section1.text1"></p>
+			<p [innerHTML]="locale.section1.text2"></p>
+			<br />
+
+			<h3>{{ locale.section2.header }}</h3>
+			<p>{{ locale.section2.text }}</p>
+			<br />
+
+			<h4>{{ locale.section2a.header }}</h4>
+			<p [innerHTML]="locale.section2a.text"></p>
+			<br />
+
+			<h4>{{ locale.section2b.header }}</h4>
+			<p [innerHTML]="locale.section2b.text"></p>
+			<br />
+
+			<h4>{{ locale.section2c.header }}</h4>
+			<p [innerHTML]="locale.section2c.text"></p>
+			<br />
+
+			<div></div>
+			<br />
+
+			<p [innerHTML]="locale.endText1"></p>
+			<p>{{ locale.endText2 }}</p>
+			<p>{{ locale.endText3 }}</p>
+		</div>
+	</div>
+</article>

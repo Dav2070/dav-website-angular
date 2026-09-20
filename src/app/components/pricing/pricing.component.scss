@@ -1,0 +1,119 @@
+.pricing-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 24px;
+	margin: 28px 0;
+}
+
+.pricing-comparison {
+	margin: 28px auto;
+	max-width: 1000px;
+}
+
+.pricing-comparison table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.pricing-comparison th {
+	text-align: left;
+	font-weight: 400;
+}
+
+.pricing-comparison th,
+.pricing-comparison td {
+	padding: 14px 16px;
+	border-bottom: 1px solid var(--dav-color-outline-variant);
+}
+
+.pricing-comparison td,
+.pricing-comparison thead th {
+	text-align: center;
+}
+
+.pricing-comparison .feature-group th {
+	padding-top: 30px;
+	font-size: 24px;
+	font-weight: 300;
+}
+
+.plan-name,
+.plan-price {
+	display: block;
+}
+
+.plan-name {
+	font-size: 26px;
+	margin-bottom: 8px;
+}
+
+.plan-price {
+	font-size: 16px;
+	font-weight: 300;
+}
+
+.pricing-mobile {
+	display: none;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+.pricing-grid dav-card {
+	--dav-color-surface-container-rgb: var(
+		--dav-color-surface-container-low-rgb
+	);
+}
+
+.pricing-grid .price {
+	color: var(--dav-color-on-surface-variant);
+	min-height: 24px;
+}
+
+.pricing-grid .storage {
+	font-size: 2rem;
+	margin: 20px 0 0;
+}
+
+.features {
+	list-style: none;
+	padding: 0;
+}
+
+.features li {
+	position: relative;
+	padding-left: 22px;
+	margin: 12px 0;
+}
+
+.features li::before {
+	content: "✓";
+	position: absolute;
+	left: 0;
+	color: var(--dav-color-primary);
+}
+
+@media (max-width: 850px) {
+	.pricing-comparison {
+		display: none;
+	}
+
+	.pricing-mobile {
+		display: grid;
+	}
+
+	.pricing-grid {
+		grid-template-columns: 1fr;
+		max-width: 520px;
+		margin-inline: auto;
+	}
+}

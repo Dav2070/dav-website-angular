@@ -1,0 +1,180 @@
+<section class="page">
+	@if (mode() === "dashboard") {
+		<h1>{{ locale.devPage.title }}</h1>
+		<div class="app-grid">
+			@for (app of store.page().data.dev?.Apps || []; track app.Id) {
+				<dav-card [headline]="app.Name" [href]="'/dev/' + app.Id" />
+			}
+		</div>
+		<div class="form-actions">
+			<dav-link-button url="/dev/statistics" target="_self">{{
+				locale.devPage.statistics
+			}}</dav-link-button>
+		</div>
+	}
+	@if (error()) {
+		<div role="alert">
+			<dav-message-bar type="error" color="error">{{
+				error()
+			}}</dav-message-bar>
+		</div>
+	}
+	@if (busy()) {
+		<dav-progress-ring aria-label="Loading" />
+	}
+	@if (mode() === "app" && app()) {
+		<h1>{{ app().Name }}</h1>
+		<p>{{ app().Description }}</p>
+		<div class="form-actions">
+			<dav-link-button
+				[url]="'/dev/' + appId + '/statistics'"
+				target="_self"
+				>{{ locale.appPage.statistics }}</dav-link-button
+			><dav-button (click)="openEdit()">{{
+				locale.appPage.edit
+			}}</dav-button>
+		</div>
+		<dav-toggle
+			[label]="locale.appPage.published"
+			[checked]="app().Published"
+			[disabled]="busy()"
+			(change)="requestPublish($event)"
+		/>
+		<h2>{{ locale.appPage.tables }}</h2>
+		<dav-list>
+			@for (table of app().Tables || []; track table.Id) {
+				<dav-list-item>{{ table.Name }}</dav-list-item>
+			}
+		</dav-list>
+	}
+	@if (statistics) {
+		<h1>
+			{{
+				app()
+					? locale.statisticsPage.appTitle.replace("{0}", app().Name)
+					: locale.statisticsPage.title
+			}}
+		</h1>
+		<div class="form-actions">
+			@for (count of [1, 3, 6, 12]; track count) {
+				<dav-button
+					[outline]="months() !== count"
+					[disabled]="busy()"
+					(click)="months.set(count); load()"
+					>{{ count }}
+					{{
+						count === 1
+							? locale.statisticsPage.month
+							: locale.statisticsPage.months
+					}}</dav-button
+				>
+			}
+		</div>
+		<div class="chart-grid">
+			<section>
+				<h2>{{ locale.statisticsPage.numberOfUsers }}</h2>
+				<div class="chart">
+					<canvas
+						#usersCanvas
+						role="img"
+						[attr.aria-label]="locale.statisticsPage.numberOfUsers"
+					></canvas>
+				</div>
+			</section>
+			<section>
+				<h2>{{ locale.statisticsPage.activeUsers }}</h2>
+				<div class="chart">
+					<canvas
+						#activeCanvas
+						role="img"
+						[attr.aria-label]="locale.statisticsPage.activeUsers"
+					></canvas>
+				</div>
+			</section>
+			<section>
+				<h2>{{ locale.statisticsPage.plans }}</h2>
+				<div class="chart">
+					<canvas
+						#plansCanvas
+						role="img"
+						[attr.aria-label]="locale.statisticsPage.plans"
+					></canvas>
+				</div>
+			</section>
+			<section>
+				<h2>{{ locale.statisticsPage.confirmations }}</h2>
+				<div class="chart">
+					<canvas
+						#confirmationsCanvas
+						role="img"
+						[attr.aria-label]="locale.statisticsPage.confirmations"
+					></canvas>
+				</div>
+			</section>
+		</div>
+		@if (!busy() && !snapshots().length && !error()) {
+			<p>
+				{{
+					locale.lang.startsWith("de")
+						? "Für diesen Zeitraum liegen keine Daten vor."
+						: "No data is available for this period."
+				}}
+			</p>
+		}
+	}
+</section>
+<dav-dialog
+	[visible]="editing()"
+	[headline]="locale.appPage.editAppDialog.header"
+	[primaryButtonText]="locale.appPage.save"
+	[defaultButtonText]="locale.appPage.cancel"
+	[loading]="busy()"
+	(primaryButtonClick)="save()"
+	(defaultButtonClick)="editing.set(false)"
+	(dismiss)="editing.set(false)"
+>
+	<div class="dialog-fields">
+		@for (field of fields; track field) {
+			@if (field === "description") {
+				<dav-textarea
+					[label]="locale.appPage.editAppDialog.descriptionTextfieldLabel"
+					[value]="edit[field] || ''"
+					(change)="edit[field] = value($event)"
+				/>
+			} @else {
+				<dav-textfield
+					[label]="locale.appPage.editAppDialog[field + 'TextfieldLabel']"
+					[value]="edit[field] || ''"
+					[type]="field === 'name' ? 'text' : 'url'"
+					(change)="edit[field] = value($event)"
+				/>
+			}
+		}
+	</div>
+	@if (error()) {
+		<dav-message-bar type="error" color="error">{{
+			error()
+		}}</dav-message-bar>
+	}
+</dav-dialog>
+<dav-dialog
+	[visible]="publishing()"
+	[headline]="
+		app()?.Published
+			? locale.appPage.publishAppDialog.unpublishHeader
+			: locale.appPage.publishAppDialog.publishHeader
+	"
+	[primaryButtonText]="locale.appPage.publishAppDialog.confirm"
+	[defaultButtonText]="locale.appPage.cancel"
+	[loading]="busy()"
+	(primaryButtonClick)="save(!app().Published)"
+	(defaultButtonClick)="publishing.set(false)"
+	(dismiss)="publishing.set(false)"
+	><p>
+		{{
+			app()?.Published
+				? locale.appPage.publishAppDialog.unpublishSubtext
+				: locale.appPage.publishAppDialog.publishSubtext
+		}}
+	</p></dav-dialog
+>

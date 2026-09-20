@@ -1,0 +1,187 @@
+<div class="pricing-comparison">
+	<table>
+		<thead>
+			<tr>
+				<th scope="col">
+					<span class="visually-hidden">{{
+						locale.onlineStorage
+					}}</span>
+				</th>
+				@for (plan of plans; track plan.value; let index = $index) {
+					<th scope="col">
+						<span class="plan-name">{{ plan.name }}</span
+						><span class="plan-price">{{
+							index === 0
+								? "0 €"
+								: index === 1
+									? locale.plus.price
+									: locale.pro.price
+						}}</span>
+					</th>
+				}
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row">{{ locale.onlineStorage }}</th>
+				<td>{{ locale.free.storage }}</td>
+				<td>{{ locale.plus.storage }}</td>
+				<td>{{ locale.pro.storage }}</td>
+			</tr>
+			@for (
+				feature of [locale.accessData, locale.noAds];
+				track feature
+			) {
+				<tr>
+					<th scope="row">{{ feature }}</th>
+					<td>✓</td>
+					<td>✓</td>
+					<td>✓</td>
+				</tr>
+			}
+			<tr class="feature-group">
+				<th colspan="4">Storyline</th>
+			</tr>
+			@for (
+				feature of [
+					locale.storyline.articleSummariesFeature,
+					locale.storyline.realTimeUpdatesFeature,
+					locale.storyline.feedPersonalizationFeature
+				];
+				track feature
+			) {
+				<tr>
+					<th scope="row">{{ feature }}</th>
+					<td>—</td>
+					<td>✓</td>
+					<td>✓</td>
+				</tr>
+			}
+			<tr class="feature-group">
+				<th colspan="4">PocketLib</th>
+			</tr>
+			<tr>
+				<th scope="row">{{ locale.pocketlib.freeShipping }}</th>
+				<td>—</td>
+				<td>—</td>
+				<td>✓</td>
+			</tr>
+			<tr class="feature-group">
+				<th colspan="4">UniversalSoundboard</th>
+			</tr>
+			@for (
+				feature of [
+					locale.universalsoundboard.outputDeviceFeature,
+					locale.universalsoundboard.hotkeyFeature
+				];
+				track feature
+			) {
+				<tr>
+					<th scope="row">{{ feature }}</th>
+					<td>—</td>
+					<td>✓</td>
+					<td>✓</td>
+				</tr>
+			}
+			<tr>
+				<td></td>
+				@for (plan of plans; track plan.value) {
+					<td>
+						@if (selectable()) {
+							<dav-button
+								[disabled]="currentPlan() === plan.value"
+								(click)="choose.emit(plan.value)"
+								>{{
+									currentPlan() === plan.value
+										? store.locale().userPage.plans.currentPlan
+										: store.locale().userPage.plans.edit
+								}}</dav-button
+							>
+						} @else {
+							<dav-link-button
+								[url]="store.user() ? '/user#plans' : '/signup'"
+								target="_self"
+								>{{
+									store.user()
+										? store.locale().userPage.plans.edit
+										: store.locale().navbarComponent.signup
+								}}</dav-link-button
+							>
+						}
+					</td>
+				}
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="pricing-grid pricing-mobile">
+	@for (plan of plans; track plan.name; let index = $index) {
+		<dav-card [headline]="plan.name">
+			<p class="price">
+				{{
+					index === 0
+						? "0 €"
+						: index === 1
+							? locale.plus.price
+							: locale.pro.price
+				}}
+			</p>
+			<p class="storage">
+				{{
+					index === 0
+						? locale.free.storage
+						: index === 1
+							? locale.plus.storage
+							: locale.pro.storage
+				}}
+			</p>
+			<p>{{ locale.onlineStorage }}</p>
+			<ul class="features">
+				<li>{{ locale.accessData }}</li>
+				<li>{{ locale.noAds }}</li>
+			</ul>
+			@if (index > 0) {
+				<h3>Storyline</h3>
+				<ul class="features">
+					<li>{{ locale.storyline.articleSummariesFeature }}</li>
+					<li>{{ locale.storyline.realTimeUpdatesFeature }}</li>
+					<li>{{ locale.storyline.feedPersonalizationFeature }}</li>
+				</ul>
+				<h3>UniversalSoundboard</h3>
+				<ul class="features">
+					<li>
+						{{ locale.universalsoundboard.outputDeviceFeature }}
+					</li>
+					<li>{{ locale.universalsoundboard.hotkeyFeature }}</li>
+				</ul>
+			}
+			@if (index === 2) {
+				<h3>PocketLib</h3>
+				<ul class="features">
+					<li>{{ locale.pocketlib.freeShipping }}</li>
+				</ul>
+			}
+			@if (selectable()) {
+				<dav-button
+					[disabled]="currentPlan() === plan.value"
+					(click)="choose.emit(plan.value)"
+					>{{
+						currentPlan() === plan.value
+							? store.locale().userPage.plans.currentPlan
+							: store.locale().userPage.plans.edit
+					}}</dav-button
+				>
+			} @else {
+				<dav-link-button
+					[url]="store.user() ? '/user#plans' : '/signup'"
+					target="_self"
+					>{{
+						store.user()
+							? store.locale().userPage.plans.edit
+							: store.locale().navbarComponent.signup
+					}}</dav-link-button
+				>
+			}
+		</dav-card>
+	}
+</div>

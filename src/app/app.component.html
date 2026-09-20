@@ -1,0 +1,93 @@
+<a class="skip-link" href="#main">{{
+	store.locale().lang.startsWith("de") ? "Zum Inhalt" : "Skip to content"
+}}</a>
+<header
+	class="site-header"
+	[class.background-visible]="navigationBackgroundVisible()"
+	[class.over-landing-page]="store.page()?.name === 'start-page'"
+>
+	<nav class="navigation" aria-label="Main navigation">
+		<a
+			routerLink="/"
+			class="brand"
+			aria-label="dav – Home"
+			(click)="menuOpen.set(false)"
+			>dav</a
+		>
+		<dav-button
+			class="menu-toggle"
+			text
+			(click)="menuOpen.set(!menuOpen())"
+			[attr.aria-expanded]="menuOpen()"
+			aria-controls="navigation-links"
+			>☰
+			{{
+				store.locale().lang.startsWith("de") ? "Menü" : "Menu"
+			}}</dav-button
+		>
+		<div
+			id="navigation-links"
+			class="navigation-links"
+			[class.expanded]="menuOpen()"
+			(click)="menuOpen.set(false)"
+		>
+			@if (store.user(); as user) {
+				@if (user.Dev || user.dev) {
+					<a routerLink="/dev">{{
+						store.locale().navbarComponent.devDashboard
+					}}</a>
+				}
+				<a routerLink="/apps">{{
+					store.locale().navbarComponent.allApps
+				}}</a>
+				<a routerLink="/user">{{ user.FirstName || user.firstName }}</a>
+				<a href="/logout">{{ store.locale().navbarComponent.logout }}</a>
+			} @else {
+				<a routerLink="/pricing">{{
+					store.locale().navbarComponent.pricing
+				}}</a>
+				<a routerLink="/login">{{
+					store.locale().navbarComponent.login
+				}}</a>
+				<a routerLink="/signup">{{
+					store.locale().navbarComponent.signup
+				}}</a>
+			}
+		</div>
+	</nav>
+</header>
+<main id="main" tabindex="-1"><router-outlet /></main>
+@if (showFooter()) {
+	<footer class="site-footer">
+		<a routerLink="/" aria-label="dav – Home">
+			<img
+				class="footer-logo footer-logo-light"
+				src="/assets/svgs/dav-logo.svg"
+				width="200"
+				height="80"
+				alt="dav"
+				loading="lazy"
+			/>
+			<img
+				class="footer-logo footer-logo-dark"
+				src="/assets/images/dav-logo-text.webp"
+				width="200"
+				height="80"
+				alt="dav"
+				loading="lazy"
+			/>
+		</a>
+		<div class="footer-links">
+			<dav-link-button url="https://blog.dav-apps.tech" target="_blank"
+				>Blog</dav-link-button
+			>
+			<dav-link-button url="/contact" target="_self">{{
+				store.locale().footerComponent.contact
+			}}</dav-link-button>
+			<dav-link-button url="/privacy" target="_self">{{
+				store.locale().footerComponent.privacy
+			}}</dav-link-button>
+		</div>
+		<p>Copyright © {{ year }}</p>
+	</footer>
+}

@@ -1,0 +1,26 @@
+<div class="app-grid">
+		@for (app of apps(); track app.Id || app.id) {
+			<dav-card [headline]="app.Name || app.name"
+				><p>{{ app.Description || app.description }}</p>
+				<div class="store-links">
+					@if (app.WebLink || app.webLink) {
+						<dav-link-button [url]="app.WebLink || app.webLink"
+							>Web App</dav-link-button
+						>
+					}
+					@if (app.GooglePlayLink || app.googlePlayLink) {
+						<dav-link-button
+							[url]="app.GooglePlayLink || app.googlePlayLink"
+							>Google Play</dav-link-button
+						>
+					}
+					@if (app.MicrosoftStoreLink || app.microsoftStoreLink) {
+						<dav-link-button
+							[url]="app.MicrosoftStoreLink || app.microsoftStoreLink"
+							>Microsoft Store</dav-link-button
+						>
+					}
+				</div></dav-card
+			>
+		}
+	</div>

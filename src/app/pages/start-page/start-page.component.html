@@ -1,0 +1,72 @@
+<section class="hero">
+	<h1>{{ store.locale().startPage.title }}</h1>
+</section>
+@for (app of apps; track app.name; let index = $index) {
+	<section
+		class="showcase"
+		[class.reverse]="index % 2 === 1"
+		[class.wide-image]="index === 2"
+		[attr.aria-labelledby]="'app-' + index"
+	>
+		<div class="showcase-image">
+			<img
+				[src]="'/assets/images/' + app.image"
+				[alt]="'Screenshot: ' + app.name"
+				loading="lazy"
+				[width]="app.width"
+				[height]="app.height"
+			/>
+		</div>
+		<div class="showcase-copy">
+			<h2 [id]="'app-' + index">{{ app.name }}</h2>
+			<p [innerHTML]="description(app.description)"></p>
+			<div class="store-links">
+				@if (app.web) {
+					<a
+						[href]="app.web"
+						target="_blank"
+						rel="noopener noreferrer"
+						[attr.aria-label]="'Open ' + app.name + ' as a web app'"
+					>
+						<img
+							class="pwa-badge"
+							src="/assets/svgs/PWA-white-en.svg"
+							[alt]="'Open ' + app.name + ' as a web app'"
+							width="162"
+							height="48"
+						/>
+					</a>
+				}
+				@if (app.microsoft) {
+					<ms-store-badge
+						[attr.productid]="app.microsoft"
+						window-mode="pop up"
+						theme="dark"
+						[attr.language]="store.locale().lang"
+						animation="off"
+					>
+					</ms-store-badge>
+				}
+				@if (app.google) {
+					<a
+						[href]="
+							'https://play.google.com/store/apps/details?id=' +
+							app.google +
+							'&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'
+						"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img
+							class="google-play-badge"
+							[alt]="'Get ' + app.name + ' on Google Play'"
+							src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
+							width="180"
+							height="70"
+						/>
+					</a>
+				}
+			</div>
+		</div>
+	</section>
+}

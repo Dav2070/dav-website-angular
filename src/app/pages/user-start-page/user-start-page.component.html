@@ -1,0 +1,23 @@
+<section class="page">
+	<h1>{{ store.locale().userStartPage.title }}</h1>
+	@if (store.page().data.user?.Apps?.length) {
+		<app-cards [apps]="store.page().data.user.Apps" />
+	} @else {
+		<div class="empty-state">
+			<h2>
+				{{
+					store
+						.locale()
+						.userStartPage.welcomeTitle.replace(
+							"{0}",
+							store.page().data.user?.FirstName || ""
+						)
+				}}
+			</h2>
+			<p>{{ store.locale().userStartPage.welcomeMessage }}</p>
+			<dav-link-button url="/apps" target="_self">{{
+				store.locale().userStartPage.welcomeButton
+			}}</dav-link-button>
+		</div>
+	}
+</section>

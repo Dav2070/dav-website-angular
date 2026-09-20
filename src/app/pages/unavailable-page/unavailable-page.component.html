@@ -1,0 +1,13 @@
+<section class="page empty-state">
+	<h1>
+		{{
+			store.locale().lang.startsWith("de")
+				? "Vorübergehend nicht erreichbar"
+				: "Temporarily unavailable"
+		}}
+	</h1>
+	<p>{{ store.locale().misc.messages.errorMessage }}</p>
+	<dav-link-button [url]="store.page().path" target="_self">{{
+		store.locale().misc.expiredSessionDialog.reload
+	}}</dav-link-button>
+</section>

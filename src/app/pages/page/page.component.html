@@ -1,0 +1,72 @@
+@if (store.page(); as page) {
+	@if (page.data.errorMessageText) {
+		<div class="notice" role="alert">
+			<dav-message-bar type="error">{{
+				page.data.errorMessageText
+			}}</dav-message-bar>
+		</div>
+	}
+	@if (page.data.successMessageText) {
+		<div class="notice" role="status">
+			<dav-message-bar type="success">{{
+				page.data.successMessageText
+			}}</dav-message-bar>
+		</div>
+	}
+	@switch (page.name) {
+		@case ("start-page") {
+			<app-start-page />
+		}
+		@case ("pricing-page") {
+			<app-pricing-page />
+		}
+		@case ("contact-page") {
+			<app-contact-page />
+		}
+		@case ("privacy-page") {
+			<app-privacy-page />
+		}
+		@case ("pocketlib-terms-page") {
+			<app-pocketlib-terms-page />
+		}
+		@case ("login-page") {
+			<app-login-page />
+		}
+		@case ("signup-page") {
+			<app-signup-page />
+		}
+		@case ("forgot-password-page") {
+			<app-forgot-password-page />
+		}
+		@case ("password-reset-page") {
+			<app-password-reset-page />
+		}
+		@case ("user-page") {
+			<app-user-page />
+		}
+		@case ("dev-page") {
+			<app-dev-page />
+		}
+		@case ("app-page") {
+			<app-app-page />
+		}
+		@case ("statistics-page") {
+			<app-statistics-page />
+		}
+		@case ("app-statistics-page") {
+			<app-app-statistics-page />
+		}
+		@case ("apps-page") {
+			<app-apps-page />
+		}
+		@case ("user-start-page") {
+			<app-user-start-page />
+		}
+		@case ("unavailable") {
+			<app-unavailable-page />
+		}
+		@default {
+			<app-not-found-page />
+		}
+	}
+}

@@ -1,0 +1,188 @@
+// Keep declarative shadow DOM consistent with the theme before hydration.
+@mixin dark-components {
+	--dav-color-scrim-opacity: var(--dav-color-scrim-dark-opacity) !important;
+	--base-rgb: var(--base-dark-rgb) !important;
+	--dav-color-primary-rgb: var(--dav-color-primary-dark-rgb) !important;
+	--dav-color-primary-container-rgb: var(
+		--dav-color-primary-container-dark-rgb
+	) !important;
+	--dav-color-on-primary-rgb: var(--dav-color-on-primary-dark-rgb) !important;
+	--dav-color-on-primary-container-rgb: var(
+		--dav-color-on-primary-container-dark-rgb
+	) !important;
+	--dav-color-inverse-primary-rgb: var(
+		--dav-color-inverse-primary-dark-rgb
+	) !important;
+	--dav-color-secondary-rgb: var(--dav-color-secondary-dark-rgb) !important;
+	--dav-color-secondary-container-rgb: var(
+		--dav-color-secondary-container-dark-rgb
+	) !important;
+	--dav-color-on-secondary-rgb: var(
+		--dav-color-on-secondary-dark-rgb
+	) !important;
+	--dav-color-on-secondary-container-rgb: var(
+		--dav-color-on-secondary-container-dark-rgb
+	) !important;
+	--dav-color-tertiary-rgb: var(--dav-color-tertiary-dark-rgb) !important;
+	--dav-color-tertiary-container-rgb: var(
+		--dav-color-tertiary-container-dark-rgb
+	) !important;
+	--dav-color-on-tertiary-rgb: var(
+		--dav-color-on-tertiary-dark-rgb
+	) !important;
+	--dav-color-on-tertiary-container-rgb: var(
+		--dav-color-on-tertiary-container-dark-rgb
+	) !important;
+	--dav-color-surface-rgb: var(--dav-color-surface-dark-rgb) !important;
+	--dav-color-surface-dim-rgb: var(
+		--dav-color-surface-dim-dark-rgb
+	) !important;
+	--dav-color-surface-bright-rgb: var(
+		--dav-color-surface-bright-dark-rgb
+	) !important;
+	--dav-color-surface-container-lowest-rgb: var(
+		--dav-color-surface-container-lowest-dark-rgb
+	) !important;
+	--dav-color-surface-container-low-rgb: var(
+		--dav-color-surface-container-low-dark-rgb
+	) !important;
+	--dav-color-surface-container-rgb: var(
+		--dav-color-surface-container-dark-rgb
+	) !important;
+	--dav-color-surface-container-high-rgb: var(
+		--dav-color-surface-container-high-dark-rgb
+	) !important;
+	--dav-color-surface-container-highest-rgb: var(
+		--dav-color-surface-container-highest-dark-rgb
+	) !important;
+	--dav-color-surface-variant-rgb: var(
+		--dav-color-surface-variant-dark-rgb
+	) !important;
+	--dav-color-on-surface-rgb: var(--dav-color-on-surface-dark-rgb) !important;
+	--dav-color-on-surface-variant-rgb: var(
+		--dav-color-on-surface-variant-dark-rgb
+	) !important;
+	--dav-color-inverse-surface-rgb: var(
+		--dav-color-inverse-surface-dark-rgb
+	) !important;
+	--dav-color-inverse-on-surface-rgb: var(
+		--dav-color-inverse-on-surface-dark-rgb
+	) !important;
+	--dav-color-background-rgb: var(--dav-color-background-dark-rgb) !important;
+	--dav-color-on-background-rgb: var(
+		--dav-color-on-background-dark-rgb
+	) !important;
+	--dav-color-error-rgb: var(--dav-color-error-dark-rgb) !important;
+	--dav-color-error-container-rgb: var(
+		--dav-color-error-container-dark-rgb
+	) !important;
+	--dav-color-on-error-rgb: var(--dav-color-on-error-dark-rgb) !important;
+	--dav-color-on-error-container-rgb: var(
+		--dav-color-on-error-container-dark-rgb
+	) !important;
+	--dav-color-outline-rgb: var(--dav-color-outline-dark-rgb) !important;
+	--dav-color-outline-variant-rgb: var(
+		--dav-color-outline-variant-dark-rgb
+	) !important;
+	--dav-color-shadow-rgb: var(--dav-color-shadow-dark-rgb) !important;
+	--dav-color-surface-tint-rgb: var(
+		--dav-color-surface-tint-dark-rgb
+	) !important;
+	--dav-color-scrim-rgb: var(--dav-color-scrim-dark-rgb) !important;
+	--dav-color-scrollbar-rgb: var(--dav-color-scrollbar-dark-rgb) !important;
+	--dav-color-skeleton-rgb: var(--dav-color-skeleton-dark-rgb) !important;
+	--dav-color-primary-hover-rgb: var(
+		--dav-color-primary-hover-dark-rgb
+	) !important;
+	--dav-color-primary-focus-rgb: var(
+		--dav-color-primary-focus-dark-rgb
+	) !important;
+	--dav-color-primary-container-hover-rgb: var(
+		--dav-color-primary-container-hover-dark-rgb
+	) !important;
+	--dav-color-primary-container-focus-rgb: var(
+		--dav-color-primary-container-focus-dark-rgb
+	) !important;
+	--dav-color-secondary-hover-rgb: var(
+		--dav-color-secondary-hover-dark-rgb
+	) !important;
+	--dav-color-secondary-focus-rgb: var(
+		--dav-color-secondary-focus-dark-rgb
+	) !important;
+	--dav-color-secondary-container-hover-rgb: var(
+		--dav-color-secondary-container-hover-dark-rgb
+	) !important;
+	--dav-color-secondary-container-focus-rgb: var(
+		--dav-color-secondary-container-focus-dark-rgb
+	) !important;
+	--dav-color-tertiary-hover-rgb: var(
+		--dav-color-tertiary-hover-dark-rgb
+	) !important;
+	--dav-color-tertiary-focus-rgb: var(
+		--dav-color-tertiary-focus-dark-rgb
+	) !important;
+	--dav-color-tertiary-container-hover-rgb: var(
+		--dav-color-tertiary-container-hover-dark-rgb
+	) !important;
+	--dav-color-tertiary-container-focus-rgb: var(
+		--dav-color-tertiary-container-focus-dark-rgb
+	) !important;
+	--dav-color-error-hover-rgb: var(
+		--dav-color-error-hover-dark-rgb
+	) !important;
+	--dav-color-error-focus-rgb: var(
+		--dav-color-error-focus-dark-rgb
+	) !important;
+	--dav-color-error-container-hover-rgb: var(
+		--dav-color-error-container-hover-dark-rgb
+	) !important;
+	--dav-color-error-container-focus-rgb: var(
+		--dav-color-error-container-focus-dark-rgb
+	) !important;
+	--dav-color-surface-hover-rgb: var(
+		--dav-color-surface-hover-dark-rgb
+	) !important;
+	--dav-color-surface-focus-rgb: var(
+		--dav-color-surface-focus-dark-rgb
+	) !important;
+	--dav-color-surface-variant-hover-rgb: var(
+		--dav-color-surface-variant-hover-dark-rgb
+	) !important;
+	--dav-color-surface-variant-focus-rgb: var(
+		--dav-color-surface-variant-focus-dark-rgb
+	) !important;
+}
+:root[data-theme="dark"]
+	:is(
+		dav-button,
+		dav-link-button,
+		dav-textfield,
+		dav-textarea,
+		dav-card,
+		dav-message-bar,
+		dav-progress-ring,
+		dav-dialog,
+		dav-toggle,
+		dav-list,
+		dav-list-item
+	) {
+	@include dark-components;
+}
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"])
+		:is(
+			dav-button,
+			dav-link-button,
+			dav-textfield,
+			dav-textarea,
+			dav-card,
+			dav-message-bar,
+			dav-progress-ring,
+			dav-dialog,
+			dav-toggle,
+			dav-list,
+			dav-list-item
+		) {
+		@include dark-components;
+	}
+}

@@ -1,0 +1,11 @@
+<section class="page empty-state">
+	<h1>404</h1>
+	<p>
+		{{
+			store.locale().lang.startsWith("de")
+				? "Diese Seite wurde nicht gefunden."
+				: "This page could not be found."
+		}}
+	</p>
+	<dav-link-button url="/" target="_self">Home</dav-link-button>
+</section>
