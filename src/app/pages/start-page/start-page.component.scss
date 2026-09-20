@@ -1,13 +1,24 @@
 .hero {
+	position: relative;
 	height: calc(70vh - 64px);
 	min-height: 360px;
 	display: flex;
 	align-items: center;
+	overflow: hidden;
+}
+
+.hero::before {
+	content: "";
+	position: absolute;
+	inset: -10px;
 	background: url("/assets/images/start-background.jpg") top center / cover
 		no-repeat;
+	filter: blur(8px);
 }
 
 .hero h1 {
+	position: relative;
+	z-index: 1;
 	width: 300px;
 	max-width: 80%;
 	margin: 0 10%;
@@ -17,9 +28,9 @@
 	font-weight: 400;
 	text-align: left;
 	color: rgb(var(--dav-color-palette-neutral99-rgb));
-	background: rgb(var(--dav-color-palette-neutral4-rgb), 0.47);
+	background: rgb(var(--dav-color-palette-neutral4-rgb), 0.5);
 	backdrop-filter: blur(10px) saturate(125%);
-	border-radius: 3px;
+	border-radius: 12px;
 }
 
 .showcase {
