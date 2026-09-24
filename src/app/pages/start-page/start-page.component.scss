@@ -80,23 +80,35 @@
 	font-size: 20px;
 }
 
+.store-links {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
 .pwa-badge {
 	display: block;
 	width: auto;
 	height: 48px;
-	margin: 0 8px;
 }
 
 .google-play-badge {
 	display: block;
-	width: auto;
+	width: 180px;
 	height: 70px;
+	transform: translate(-11px, -11px);
+}
+
+.google-play-link {
+	flex: 0 0 158px;
+	height: 48px;
+	overflow: hidden;
 }
 
 ms-store-badge {
 	display: block;
 	height: 48px;
-	margin: 0 8px;
 }
 
 ms-store-badge::part(img) {
