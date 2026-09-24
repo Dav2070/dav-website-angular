@@ -8,7 +8,7 @@ import {
 	inject,
 	signal
 } from "@angular/core"
-import { RouterLink, RouterOutlet } from "@angular/router"
+import { Router, RouterLink, RouterOutlet } from "@angular/router"
 import { setTheme, setLocale, Theme } from "dav-ui-components"
 import { PageStore } from "./page-data"
 
@@ -21,7 +21,7 @@ import { PageStore } from "./page-data"
 })
 export class AppComponent {
 	readonly store = inject(PageStore)
-	readonly menuOpen = signal(false)
+	readonly router = inject(Router)
 	readonly navigationBackgroundVisible = signal(false)
 	readonly theme = signal("system")
 	readonly year = new Date().getFullYear()
@@ -59,6 +59,10 @@ export class AppComponent {
 				media.removeEventListener("change", listener)
 			})
 		})
+	}
+
+	logout() {
+		window.location.assign("/logout")
 	}
 
 	private applyTheme() {

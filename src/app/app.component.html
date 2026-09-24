@@ -11,49 +11,36 @@
 			routerLink="/"
 			class="brand"
 			aria-label="dav – Home"
-			(click)="menuOpen.set(false)"
 			>dav</a
 		>
-		<dav-button
-			class="menu-toggle"
-			text
-			(click)="menuOpen.set(!menuOpen())"
-			[attr.aria-expanded]="menuOpen()"
-			aria-controls="navigation-links"
-			>☰
-			{{
-				store.locale().lang.startsWith("de") ? "Menü" : "Menu"
-			}}</dav-button
-		>
-		<div
-			id="navigation-links"
-			class="navigation-links"
-			[class.expanded]="menuOpen()"
-			(click)="menuOpen.set(false)"
-		>
+		<dav-tab-bar class="navigation-links">
 			@if (store.user(); as user) {
 				@if (user.Dev || user.dev) {
-					<a routerLink="/dev">{{
+					<dav-tab-bar-item routerLink="/dev" [active]="router.url === '/dev'">{{
 						store.locale().navbarComponent.devDashboard
-					}}</a>
+					}}</dav-tab-bar-item>
 				}
-				<a routerLink="/apps">{{
+				<dav-tab-bar-item routerLink="/apps" [active]="router.url === '/apps'">{{
 					store.locale().navbarComponent.allApps
-				}}</a>
-				<a routerLink="/user">{{ user.FirstName || user.firstName }}</a>
-				<a href="/logout">{{ store.locale().navbarComponent.logout }}</a>
+				}}</dav-tab-bar-item>
+				<dav-tab-bar-item routerLink="/user" [active]="router.url === '/user'">{{
+					user.FirstName || user.firstName
+				}}</dav-tab-bar-item>
+				<dav-tab-bar-item (click)="logout()">{{
+					store.locale().navbarComponent.logout
+				}}</dav-tab-bar-item>
 			} @else {
-				<a routerLink="/pricing">{{
+				<dav-tab-bar-item routerLink="/pricing" [active]="router.url === '/pricing'">{{
 					store.locale().navbarComponent.pricing
-				}}</a>
-				<a routerLink="/login">{{
+				}}</dav-tab-bar-item>
+				<dav-tab-bar-item routerLink="/login" [active]="router.url === '/login'">{{
 					store.locale().navbarComponent.login
-				}}</a>
-				<a routerLink="/signup">{{
+				}}</dav-tab-bar-item>
+				<dav-tab-bar-item routerLink="/signup" [active]="router.url === '/signup'">{{
 					store.locale().navbarComponent.signup
-				}}</a>
+				}}</dav-tab-bar-item>
 			}
-		</div>
+		</dav-tab-bar>
 	</nav>
 </header>
 <main id="main" tabindex="-1"><router-outlet /></main>
