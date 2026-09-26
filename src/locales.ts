@@ -99,12 +99,12 @@ const enDefaults = {
 			`
 		},
 		section2b: {
-			header: "AppCenter",
+			header: "Sentry",
 			text: `
-				In UniversalSoundboard we use <a href="https://appcenter.ms" target="_blank" rel="noopener noreferrer">AppCenter</a>, a service provided by Microsoft for usage statistics and error diagnostics.
-				When you use UniversalSoundboard, the app version, your version of Windows, your device, your language, and your app settings, as well as other information, is stored by AppCenter.
-				With this data we are able to find and fix errors and crashes.
-				<br>For more information, please refer to the <a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank" rel="noopener noreferrer">Privacy Policy of Microsoft</a>.
+				We use <a href="https://sentry.io" target="_blank" rel="noopener noreferrer">Sentry</a> to monitor errors and crashes and help us diagnose and fix problems.
+				When an error occurs, technical information about the error and its context, such as the app version and operating system, may be sent to and stored by Sentry.
+				The information included depends on the error report.
+				<br>For more information, please refer to <a href="https://sentry.io/privacy/" target="_blank" rel="noopener noreferrer">Sentry's Privacy Policy</a>.
 			`
 		},
 		section2c: {
@@ -587,12 +587,12 @@ const deDefaults = {
 			`
 		},
 		section2b: {
-			header: "AppCenter",
+			header: "Sentry",
 			text: `
-				In UniversalSoundboard verwenden wir <a href="https://appcenter.ms" target="_blank" rel="noopener noreferrer">AppCenter</a>, ein Dienst von Microsoft für Nutzungsstatistiken und zur Fehlerdiagnose.
-				Wenn du UniversalSoundboard nutzt, werden u.a. die App-Version, deine Version von Windows, dein Gerät, deine Sprache und deine App-Einstellungen durch AppCenter gespeichert.
-				Mit diesen Daten sind wir in der Lage, Fehler und Abstürze zu finden und zu beheben.
-				<br>Für weitere Informationen verweisen wir auf die <a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von Microsoft</a>.
+				Wir verwenden <a href="https://sentry.io" target="_blank" rel="noopener noreferrer">Sentry</a>, um Fehler und Abstürze zu überwachen und Probleme zu diagnostizieren und zu beheben.
+				Wenn ein Fehler auftritt, können technische Informationen zum Fehler und seinem Kontext, wie die App-Version und das Betriebssystem, an Sentry übermittelt und dort gespeichert werden.
+				Welche Informationen enthalten sind, hängt vom jeweiligen Fehlerbericht ab.
+				<br>Weitere Informationen findest du in Sentrys <a href="https://sentry.io/privacy/" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a>.
 			`
 		},
 		section2c: {
