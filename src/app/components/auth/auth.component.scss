@@ -2,6 +2,29 @@
 	max-width: 450px;
 }
 
+.auth-logo {
+	display: block;
+	width: 96px;
+	margin: 0 auto 24px;
+	line-height: 0;
+}
+
+.auth-logo img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+:host-context(:root[data-theme="dark"]) .auth-logo img {
+	filter: brightness(0) invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+	:host-context(:root:not([data-theme="light"])) .auth-logo img {
+		filter: brightness(0) invert(1);
+	}
+}
+
 .auth h1 {
 	margin-bottom: 28px;
 }
@@ -11,10 +34,16 @@
 	gap: 20px;
 }
 
-.auth-links {
-	margin: 24px 0;
+.auth-submit {
 	display: flex;
-	flex-wrap: wrap;
+	align-items: center;
+	gap: 14px;
+}
+
+.auth-account-actions {
 	justify-content: space-between;
-	gap: 16px;
+}
+
+.auth-account-actions dav-link-button {
+	margin-left: auto;
 }

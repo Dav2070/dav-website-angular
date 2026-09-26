@@ -1,4 +1,14 @@
 <section class="auth page">
+	@if (mode() === "login" || mode() === "signup") {
+		<a class="auth-logo" routerLink="/" aria-label="dav – Home">
+			<img
+				src="/assets/images/dav-logo.png"
+				width="96"
+				height="96"
+				alt="dav"
+			/>
+		</a>
+	}
 	<h1>{{ locale.title }}</h1>
 	@if (mode() === "forgot") {
 		<p>{{ locale.description }}</p>
@@ -17,7 +27,6 @@
 				[label]="locale.firstNameTextfieldLabel"
 				[placeholder]="locale.firstNameTextfieldPlaceholder"
 				autocomplete="given-name"
-				required
 				[disabled]="busy()"
 				[value]="firstName"
 				(change)="firstName = value($event); error.set('')"
@@ -30,7 +39,7 @@
 				[placeholder]="locale.emailTextfieldPlaceholder"
 				type="email"
 				autocomplete="email"
-				required
+				[attr.required]="mode() === 'forgot' ? '' : null"
 				[disabled]="busy()"
 				[value]="email"
 				(change)="email = value($event); error.set('')"
@@ -45,7 +54,7 @@
 				[autocomplete]="
 					mode() === 'login' ? 'current-password' : 'new-password'
 				"
-				required
+				[attr.required]="mode() === 'reset' ? '' : null"
 				[disabled]="busy()"
 				[value]="password"
 				(change)="password = value($event); error.set('')"
@@ -57,31 +66,37 @@
 				[label]="locale.passwordConfirmationTextfieldLabel"
 				type="password"
 				autocomplete="new-password"
-				required
+				[attr.required]="mode() === 'reset' ? '' : null"
 				[disabled]="busy()"
 				[value]="confirmation"
 				(change)="confirmation = value($event); error.set('')"
 				(enter)="submit()"
 			/>
 		}
-		<div class="form-actions">
-			<dav-button [disabled]="busy()" (click)="submit()">{{
-				actionLabel
-			}}</dav-button>
-			@if (busy()) {
-				<dav-progress-ring aria-label="Loading" />
+		<div
+			class="form-actions"
+			[class.auth-account-actions]="mode() === 'login' || mode() === 'signup'"
+		>
+			<div class="auth-submit">
+				<dav-button [disabled]="busy()" (click)="submit()">{{
+					actionLabel
+				}}</dav-button>
+				@if (busy()) {
+					<dav-progress-ring aria-label="Loading" />
+				}
+			</div>
+			@if (mode() === "login") {
+				<dav-link-button url="/forgot-password" target="_self">{{
+					locale.forgotPassword
+				}}</dav-link-button>
+			} @else if (mode() === "signup") {
+				<dav-link-button [url]="loginUrl" target="_self">{{
+					locale.login
+				}}</dav-link-button>
 			}
 		</div>
 	</form>
 	@if (mode() === "login") {
-		<div class="auth-links">
-			<a routerLink="/forgot-password">{{ locale.forgotPassword }}</a
-			><a
-				routerLink="/signup"
-				[queryParams]="route.snapshot.queryParams"
-				>{{ locale.signup }}</a
-			>
-		</div>
 		@if (store.user() && route.snapshot.queryParamMap.has("appId")) {
 			<dav-button outline [disabled]="busy()" (click)="submit(true)">{{
 				locale.loginAs.replace(
@@ -90,10 +105,5 @@
 				)
 			}}</dav-button>
 		}
-	}
-	@if (mode() === "signup") {
-		<a routerLink="/login" [queryParams]="route.snapshot.queryParams">{{
-			locale.login
-		}}</a>
 	}
 </section>

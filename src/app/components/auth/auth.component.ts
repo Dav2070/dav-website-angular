@@ -5,7 +5,7 @@ import {
 	input,
 	signal
 } from "@angular/core"
-import { ActivatedRoute, RouterLink } from "@angular/router"
+import { ActivatedRoute, Router, RouterLink } from "@angular/router"
 import { errorText, fieldValue, PageStore } from "../../page-data"
 
 @Component({
@@ -18,6 +18,7 @@ import { errorText, fieldValue, PageStore } from "../../page-data"
 export class AuthComponent {
 	readonly store = inject(PageStore)
 	readonly route = inject(ActivatedRoute)
+	private readonly router = inject(Router)
 	readonly mode = input<"login" | "signup" | "forgot" | "reset">("login")
 	readonly busy = signal(false)
 	readonly error = signal("")
@@ -44,6 +45,14 @@ export class AuthComponent {
 				: this.mode() === "forgot"
 					? this.locale.send
 					: this.locale.save
+	}
+
+	get loginUrl() {
+		return this.router.serializeUrl(
+			this.router.createUrlTree(["/login"], {
+				queryParams: this.route.snapshot.queryParams
+			})
+		)
 	}
 
 	async submit(existing = false) {
