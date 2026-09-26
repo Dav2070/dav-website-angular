@@ -44,6 +44,40 @@ export class AppComponent {
 				this.navigationBackgroundVisible.set(window.scrollY > 80)
 			updateNavigation()
 			window.addEventListener("scroll", updateNavigation, { passive: true })
+			const handleLinkButtonClick = (event: MouseEvent) => {
+				if (
+					event.defaultPrevented ||
+					event.button !== 0 ||
+					event.ctrlKey ||
+					event.metaKey ||
+					event.shiftKey ||
+					event.altKey
+				)
+					return
+
+				const linkButton = event
+					.composedPath()
+					.find(
+						(node): node is HTMLElement =>
+							node instanceof HTMLElement &&
+							node.localName === "dav-link-button"
+					)
+				if (!linkButton || linkButton.hasAttribute("data-force-reload")) return
+
+				const url =
+					(linkButton as HTMLElement & { url?: string }).url ||
+					linkButton.getAttribute("url") ||
+					""
+				const target =
+					linkButton.getAttribute("target") ||
+					(linkButton as HTMLElement & { target?: string }).target
+				if (target !== "_self" || !url.startsWith("/") || url.startsWith("//"))
+					return
+
+				event.preventDefault()
+				void this.router.navigateByUrl(url)
+			}
+			document.addEventListener("click", handleLinkButtonClick)
 
 			const saved = document.cookie.match(
 				/(?:^|; )dav-theme=(light|dark|system)(?:;|$)/
@@ -56,6 +90,7 @@ export class AppComponent {
 			media.addEventListener("change", listener)
 			destroy.onDestroy(() => {
 				window.removeEventListener("scroll", updateNavigation)
+				document.removeEventListener("click", handleLinkButtonClick)
 				media.removeEventListener("change", listener)
 			})
 		})

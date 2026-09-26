@@ -7,7 +7,7 @@
 		}}
 	</h1>
 	<p>{{ store.locale().misc.messages.errorMessage }}</p>
-	<dav-link-button [url]="store.page().path" target="_self">{{
+	<dav-link-button [url]="store.page().path" target="_self" data-force-reload>{{
 		store.locale().misc.expiredSessionDialog.reload
 	}}</dav-link-button>
 </section>
