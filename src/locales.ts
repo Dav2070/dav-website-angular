@@ -119,7 +119,7 @@ const enDefaults = {
 		endText1: `These rules apply to all our apps and websites, including web apps and our blog. If you have any questions you can always contact us at <a href="mailto:support@dav-apps.tech" >support@dav-apps.tech</a>.`,
 		endText2:
 			"We reserve the right to update this privacy policy in the future.",
-		endText3: "Last update: December 5, 2021"
+		endText3: "Last update: September 26, 2026"
 	},
 	pocketlibTermsPage: {
 		title: "Terms of Service for authors",
@@ -607,7 +607,7 @@ const deDefaults = {
 		endText1: `Diese Regeln gelten für all unsere Apps und Webseiten, einschließlich Web-Apps und unseren Blog. Bei Fragen kannst du uns jederzeit über <a href="mailto:support@dav-apps.tech" >support@dav-apps.tech</a> kontaktieren.`,
 		endText2:
 			"Wir behalten uns das Recht vor, diese Datenschutzerklärung in Zukunft zu aktualisieren.",
-		endText3: "Letzte Aktualisierung: 5. Dezember 2021"
+		endText3: "Letzte Aktualisierung: 26. September 2026"
 	},
 	pocketlibTermsPage: {
 		title: "Allgemeine Geschäftsbedingungen für Autoren",

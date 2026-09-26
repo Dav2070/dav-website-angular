@@ -18,10 +18,7 @@
 			<dav-message-bar type="error">{{ error() }}</dav-message-bar>
 		</div>
 	}
-	<form
-		(submit)="$event.preventDefault(); submit()"
-		[attr.aria-busy]="busy()"
-	>
+	<form (submit)="$event.preventDefault(); submit()" [attr.aria-busy]="busy()">
 		@if (mode() === "signup") {
 			<dav-textfield
 				[label]="locale.firstNameTextfieldLabel"
@@ -39,7 +36,6 @@
 				[placeholder]="locale.emailTextfieldPlaceholder"
 				type="email"
 				autocomplete="email"
-				[attr.required]="mode() === 'forgot' ? '' : null"
 				[disabled]="busy()"
 				[value]="email"
 				(change)="email = value($event); error.set('')"
@@ -75,7 +71,9 @@
 		}
 		<div
 			class="form-actions"
-			[class.auth-account-actions]="mode() === 'login' || mode() === 'signup'"
+			[class.auth-account-actions]="
+				mode() === 'login' || mode() === 'signup'
+			"
 		>
 			<div class="auth-submit">
 				<dav-button [disabled]="busy()" (click)="submit()">{{
