@@ -5,6 +5,7 @@ import {
 	input,
 	output
 } from "@angular/core"
+import { Router } from "@angular/router"
 import { PageStore } from "../../page-data"
 
 @Component({
@@ -15,6 +16,7 @@ import { PageStore } from "../../page-data"
 })
 export class PricingComponent {
 	readonly store = inject(PageStore)
+	private readonly router = inject(Router)
 	readonly selectable = input(false)
 	readonly currentPlan = input("FREE")
 	readonly choose = output<string>()
@@ -25,5 +27,9 @@ export class PricingComponent {
 	]
 	get locale() {
 		return this.store.locale().misc.pricing
+	}
+
+	signup() {
+		void this.router.navigateByUrl("/signup")
 	}
 }

@@ -98,15 +98,15 @@
 								}}</dav-button
 							>
 						} @else {
-							<dav-link-button
-								[url]="store.user() ? '/user#plans' : '/signup'"
-								target="_self"
-								>{{
-									store.user()
-										? store.locale().userPage.plans.edit
-										: store.locale().navbarComponent.signup
-								}}</dav-link-button
-							>
+							@if (store.user()) {
+								<dav-link-button url="/user#plans" target="_self">{{
+									store.locale().userPage.plans.edit
+								}}</dav-link-button>
+							} @else {
+								<dav-button (click)="signup()">{{
+									store.locale().navbarComponent.signup
+								}}</dav-button>
+							}
 						}
 					</td>
 				}
@@ -172,15 +172,15 @@
 					}}</dav-button
 				>
 			} @else {
-				<dav-link-button
-					[url]="store.user() ? '/user#plans' : '/signup'"
-					target="_self"
-					>{{
-						store.user()
-							? store.locale().userPage.plans.edit
-							: store.locale().navbarComponent.signup
-					}}</dav-link-button
-				>
+				@if (store.user()) {
+					<dav-link-button url="/user#plans" target="_self">{{
+						store.locale().userPage.plans.edit
+					}}</dav-link-button>
+				} @else {
+					<dav-button (click)="signup()">{{
+						store.locale().navbarComponent.signup
+					}}</dav-button>
+				}
 			}
 		</dav-card>
 	}
